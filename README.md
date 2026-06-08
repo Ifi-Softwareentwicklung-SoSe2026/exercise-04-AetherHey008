@@ -469,12 +469,47 @@ Roboter <|-- Lieferroboter
 
 Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt werden.
 
+Begruendung fuer die Aenderung: Auslagerung der Persitenz in eine Speicherklasse
+Sorry fuer die "unproffesionelle" beschreibung vorhin :( ICh hab jetzt eine Composition zwischen Speicehr jund Roboter als auch eine verbessung der Sichtbarkeiten
 
 ```text @plantUML
 @startuml
 
-Arbeiten Sie hier !!!
+class Roboter
+{
+  + Roboter(): Roboter
+  # Name: string
+  # Typ: string
+  # Energielevel: int
+  + Virtual GetStatus(): string
+  + virtual Activate(): void
+  + Speicher: Roboterspeicher 
+}
+class Roboterspeicher
+{
+  + SpeichernAlsCSV(string dateipfad): void
+  + static LadenAusCSV(string dateipfad): Roboter
+  + SpeichernAlsJSON(string dateipfad): void
+  + static LadenAusJSON(string dateipfad): Roboter
+}
+class Lieferroboter
+{
+  - Lieferkapazität: int
+  + Lieferroboter(): Lieferroboter
+  + GetStatus(): string
+}
 
+interface ISerializer
+{
+    + SpeichernAlsJSON(string dateipfad): void
+    + static abstract LadenAusJSON(string dateipfad): Roboter
+    + SpeichernAlsCSV(string dateipfad): void
+    + static abstract LadenAusCSV(string dateipfad): Roboter
+}
+
+ISerializer <|.. Roboterspeicher
+Roboter <|-- Lieferroboter
+Roboterspeicher *-- Roboter
 @enduml
 ```
 @plantUML.eval(png)
