@@ -20,7 +20,7 @@ tags: [ Sommersemester2026, Softwareentwicklung, Übung04]
 
 -->
 
-[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise_04/refs/heads/main/README.md)
+[![LiaScript Course](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/Ifi-Softwareentwicklung-SoSe2026/exercise_04/exercise-04-AetherHey008/refs/heads/main/README.md)
 
 #  Aufgabe 04
 
@@ -422,11 +422,45 @@ Hier bitte den Code aus `robots_exercise` in ein UML Diagramm überführen.
 
 
 ```text @plantUML
+
+
 @startuml
 
-Arbeiten Sie hier !!!
+class Roboter
+{
+  + Roboter(): Roboter
+  + Name: string
+  + Typ: string
+  + Energielevel: int
+  + SpeichernAlsCSV(string dateipfad): void
+  + static LadenAusCSV(string dateipfad): Roboter
+  + SpeichernAlsJSON(string dateipfad): void
+  + static LadenAusJSON(string dateipfad): Roboter
+  + Virtual GetStatus(): string
+  + virtual Activate(): void
+}
+
+class Lieferroboter
+{
+  + Lieferkapazität: int
+  + Lieferroboter(): Lieferroboter
+  + GetStatus(): string
+}
+
+interface ISerializer
+{
+    + SpeichernAlsJSON(string dateipfad): void
+    + static abstract LadenAusJSON(string dateipfad): Roboter
+    + SpeichernAlsCSV(string dateipfad): void
+    + static abstract LadenAusCSV(string dateipfad): Roboter
+}
+
+ISerializer <|.. Roboter
+Roboter <|-- Lieferroboter
 
 @enduml
+
+
 ```
 @plantUML.eval(png)
 
