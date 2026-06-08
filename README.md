@@ -480,16 +480,16 @@ class Roboter
   ~ Name: string
   ~ Typ: string
   ~ Energielevel: int
-  - SpeichernAlsCSV(string dateipfad): void
-  + static LadenAusCSV(string dateipfad): Roboter
-  - SpeichernAlsJSON(string dateipfad): void
-  + static LadenAusJSON(string dateipfad): Roboter
   + Virtual GetStatus(): string
   + virtual Activate(): void
 }
 
 class Lieferroboter
 {
+  - SpeichernAlsCSV(string dateipfad): void
+  + static LadenAusCSV(string dateipfad): Roboter
+  - SpeichernAlsJSON(string dateipfad): void
+  + static LadenAusJSON(string dateipfad): Roboter
   - Lieferkapazität: int
   + Lieferroboter(): Lieferroboter
   + GetStatus(): string
