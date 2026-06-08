@@ -469,8 +469,7 @@ Roboter <|-- Lieferroboter
 
 Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt werden.
 
-Begruendung fuer die Aenderung: Aktuell Waren alle auf public was grosse probleme mitsich bringen kann da der nutzer wichitge daten einsehen und aendern kann. Ich habe teilweise sachen zu private and protected was die sicherheit erhoehen sollte.
-
+Begruendung fuer die Aenderung: Auslagerung der Persitenz in eine Speicherklasse
 ```text @plantUML
 @startuml
 
@@ -480,11 +479,16 @@ class Roboter
   ~ Name: string
   ~ Typ: string
   ~ Energielevel: int
-  
   + Virtual GetStatus(): string
   + virtual Activate(): void
 }
-
+class Roboterspeicher
+{
+  - SpeichernAlsCSV(string dateipfad): void
+  + static LadenAusCSV(string dateipfad): Roboter
+  - SpeichernAlsJSON(string dateipfad): void
+  + static LadenAusJSON(string dateipfad): Roboter
+}
 class Lieferroboter
 {
   - Lieferkapazität: int
@@ -494,12 +498,15 @@ class Lieferroboter
 
 interface ISerializer
 {
-    
+    + SpeichernAlsJSON(string dateipfad): void
+    + static abstract LadenAusJSON(string dateipfad): Roboter
+    + SpeichernAlsCSV(string dateipfad): void
+    + static abstract LadenAusCSV(string dateipfad): Roboter
 }
 
 ISerializer <|.. Roboter
 Roboter <|-- Lieferroboter
-
+Roboter <|-- Roboterspeicher
 @enduml
 ```
 @plantUML.eval(png)
