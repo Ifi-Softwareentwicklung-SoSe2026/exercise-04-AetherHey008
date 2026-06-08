@@ -432,9 +432,6 @@ class Roboter
   + Name: string
   + Typ: string
   + Energielevel: int
-  + Name(): string
-  + Typ(): string
-  + Energielevel(): int
   + SpeichernAlsCSV(string dateipfad): void
   + static LadenAusCSV(string dateipfad): Roboter
   + SpeichernAlsJSON(string dateipfad): void
