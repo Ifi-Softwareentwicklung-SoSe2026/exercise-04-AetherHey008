@@ -469,11 +469,42 @@ Roboter <|-- Lieferroboter
 
 Hier soll das überarbeitete UML Diagramm zum Code in `robots_exercise` erstellt werden.
 
+Begruendung fuer die Aenderung: Aktuell Waren alle auf public was grosse probleme mitsich bringen kann da der nutzer wichitge daten einsehen und aendern kann. Ich habe teilweise sachen zu private and protected was die sicherheit erhoehen sollte.
 
 ```text @plantUML
 @startuml
 
-Arbeiten Sie hier !!!
+class Roboter
+{
+  + Roboter(): Roboter
+  ~ Name: string
+  ~ Typ: string
+  ~ Energielevel: int
+  - SpeichernAlsCSV(string dateipfad): void
+  + static LadenAusCSV(string dateipfad): Roboter
+  - SpeichernAlsJSON(string dateipfad): void
+  + static LadenAusJSON(string dateipfad): Roboter
+  + Virtual GetStatus(): string
+  + virtual Activate(): void
+}
+
+class Lieferroboter
+{
+  - Lieferkapazität: int
+  + Lieferroboter(): Lieferroboter
+  + GetStatus(): string
+}
+
+interface ISerializer
+{
+    + SpeichernAlsJSON(string dateipfad): void
+    + static abstract LadenAusJSON(string dateipfad): Roboter
+    + SpeichernAlsCSV(string dateipfad): void
+    + static abstract LadenAusCSV(string dateipfad): Roboter
+}
+
+ISerializer <|.. Roboter
+Roboter <|-- Lieferroboter
 
 @enduml
 ```
