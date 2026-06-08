@@ -480,8 +480,7 @@ class Roboter
   ~ Name: string
   ~ Typ: string
   ~ Energielevel: int
-  + static LadenAusCSV(string dateipfad): Roboter
-  + static LadenAusJSON(string dateipfad): Roboter
+  
   + Virtual GetStatus(): string
   + virtual Activate(): void
 }
@@ -495,8 +494,7 @@ class Lieferroboter
 
 interface ISerializer
 {
-    + static abstract LadenAusJSON(string dateipfad): Roboter
-    + static abstract LadenAusCSV(string dateipfad): Roboter
+    
 }
 
 ISerializer <|.. Roboter
