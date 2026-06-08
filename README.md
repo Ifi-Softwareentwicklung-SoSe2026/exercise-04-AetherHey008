@@ -429,7 +429,6 @@ Hier bitte den Code aus `robots_exercise` in ein UML Diagramm überführen.
 class Roboter
 {
   + Roboter(): Roboter
-
   + Name: string
   + Typ: string
   + Energielevel: int
@@ -454,9 +453,9 @@ class Lieferroboter
 interface ISerializer
 {
     + SpeichernAlsJSON(string dateipfad): void
-    + LadenAusJSON(string dateipfad): Roboter
+    + static abstract LadenAusJSON(string dateipfad): Roboter
     + SpeichernAlsCSV(string dateipfad): void
-    + LadenAusCSV(string dateipfad): Roboter
+    + static abstract LadenAusCSV(string dateipfad): Roboter
 }
 
 ISerializer <|.. Roboter
